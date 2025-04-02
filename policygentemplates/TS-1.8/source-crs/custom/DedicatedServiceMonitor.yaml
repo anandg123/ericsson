@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-monitoring-config
+  namespace: openshift-monitoring
+  annotations:
+    ran.openshift.io/ztp-deploy-wave: "6"
+data:
+  config.yaml: |
+    k8sPrometheusAdapter:
+      dedicatedServiceMonitors:
+        enabled: true
+    nodeExporter:
+      collectors:
+        buddyinfo: {}
+        cpufreq: {}
+        ksmd: {}
+        mountstats: {}
+        netclass: {}
+        netdev: {}
+        processes: {}
+        systemd: {}
+        tcpstat: {}
+    prometheusK8s:
+      additionalAlertmanagerConfigs:
+      - apiVersion: v2
+        bearerToken:
+          key: token
+          name: observability-alertmanager-accessor
+        scheme: https
+        staticConfigs:
+        - alertmanager-open-cluster-management-observability.apps.fc45-ericsson.ocp.local
+        tlsConfig:
+          ca:
+            key: service-ca.crt
+            name: hub-alertmanager-router-ca
+          insecureSkipVerify: false
+      externalLabels:
+        managed_cluster: 
+          - 0ba6aaff-8e3e-492c-ba52-1ba3dc6e015f
+          - 416b726b-e04e-4838-92e9-7dcc6e8430e8

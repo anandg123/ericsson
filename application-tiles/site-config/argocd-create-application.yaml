@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: siteconfig-workload
+  namespace: openshift-gitops
+    #  labels:
+    #velero.io/exclude-from-backup: "true"
+spec:
+  destination:
+    namespace: std-workload
+    server: https://kubernetes.default.svc
+  project: site-config-project
+  source:
+    path: siteconfig/
+    repoURL: https://10.188.44.153/gitlab/root/ericsson.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - PrunePropagationPolicy=background
+    - RespectIgnoreDifferences=true

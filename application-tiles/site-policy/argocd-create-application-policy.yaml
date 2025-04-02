@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sitepolicy-std-workload
+  namespace: openshift-gitops
+    #  labels:
+    #velero.io/exclude-from-backup: "true"
+spec:
+  destination:
+    namespace: ztp-std-workload-policies
+    server: https://kubernetes.default.svc
+  project: site-policy-project
+  source:
+    path: policygentemplates/
+    repoURL: https://10.188.44.153/gitlab/root/ericsson.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

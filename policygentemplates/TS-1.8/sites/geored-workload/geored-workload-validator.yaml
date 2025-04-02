@@ -1,0 +1,44 @@
+---
+apiVersion: ran.openshift.io/v1
+kind: PolicyGenTemplate
+metadata:
+  name: "geored-workload-validator-1.8"
+  namespace: "ztp-site"
+spec:
+  bindingRules:
+    sites: "geored-workload"
+    version: TS-1.8
+  bindingExcludedRules:
+    ztp-done: ""
+  sourceFiles:
+    ##########
+    # validator
+    ##########
+    #- fileName: custom/validatorCRs/informPacketCOREValidator/SRIOV.yaml
+    #  policyName: packet-core-validator
+    - fileName: custom/validatorCRs/informPacketCOREValidator/MCP.yaml
+      policyName: packet-core-validator
+      metadata:
+        name: master
+    - fileName: custom/validatorCRs/informPacketCOREValidator/MCP.yaml
+      policyName: packet-core-validator
+      metadata:
+        name: worker
+    - fileName: custom/validatorCRs/informPacketCOREValidator/MCP.yaml
+      policyName: packet-core-validator
+      metadata:
+        name: standard
+    # - fileName: custom/validatorCRs/informPacketCOREValidator/MCP.yaml
+    #   policyName: packet-core-validator
+    #   metadata:
+    #     name: ht100gb
+    #   status:
+    #     configuration:
+    #       source:
+    #       - apiVersion: machineconfiguration.openshift.io/v1
+    #         kind: MachineConfig
+    #         name: 50-performance-ht100gb
+    #       - apiVersion: machineconfiguration.openshift.io/v1
+    #         kind: MachineConfig
+    #         name: 50-nto-ht100gb
+

@@ -1,0 +1,149 @@
+apiVersion: nmstate.io/v1alpha1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: worker1.site2.r450.org
+  annotations:
+    ran.openshift.io/ztp-deploy-wave: "100"
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: worker1.site2.r450.org
+  desiredState:
+    interfaces:
+    - name: ens1f0.3516
+      type: vlan
+      state: up
+      ipv4:
+        address:
+        - ip: 192.168.216.9
+          prefix-length: 24
+        dhcp: false
+        enabled: true
+      vlan:
+        base-iface: ens1f0
+        id: 3516
+    - name: ens1f0.3518
+      type: vlan
+      state: up
+      ipv4:
+        address:
+        - ip: 192.168.218.9
+          prefix-length: 24
+        dhcp: false
+        enabled: true
+      vlan:
+        base-iface: ens1f0
+        id: 3518
+    - name: ens1f0.3517
+      type: vlan
+      state: up
+      ipv4:
+        address:
+        - ip: 192.168.217.9
+          prefix-length: 24
+        dhcp: false
+        enabled: true
+      vlan:
+        base-iface: ens1f0
+        id: 3517
+    routes:
+      config:
+      - destination: 5.8.6.0/27
+        metric: 400
+        next-hop-address: 192.168.216.1
+        next-hop-interface: ens1f0.3516
+      - destination: 5.8.6.96/28
+        metric: 400
+        next-hop-address: 192.168.216.1
+        next-hop-interface: ens1f0.3516
+      - destination: 5.16.0.1/32
+        metric: 400
+        next-hop-address: 192.168.216.1
+        next-hop-interface: ens1f0.3516
+      - destination: 6.72.0.1/32
+        metric: 400
+        next-hop-address: 192.168.216.1
+        next-hop-interface: ens1f0.3516
+      - destination: 6.72.0.33/32
+        metric: 400
+        next-hop-address: 192.168.216.1
+        next-hop-interface: ens1f0.3516
+      - destination: 6.72.0.65/32
+        metric: 400
+        next-hop-address: 192.168.216.1
+        next-hop-interface: ens1f0.3516
+      - destination: 11.0.2.0/24
+        metric: 400
+        next-hop-address: 192.168.216.1
+        next-hop-interface: ens1f0.3516
+      - destination: 11.2.2.0/24
+        metric: 400
+        next-hop-address: 192.168.216.1
+        next-hop-interface: ens1f0.3516
+      - destination: 29.0.64.121/32
+        metric: 400
+        next-hop-address: 192.168.216.1
+        next-hop-interface: ens1f0.3516
+      - destination: 106.102.0.65/32
+        metric: 400
+        next-hop-address: 192.168.216.1
+        next-hop-interface: ens1f0.3516
+      - destination: 106.102.0.97/32
+        metric: 400
+        next-hop-address: 192.168.216.1
+        next-hop-interface: ens1f0.3516
+      - destination: 109.1.0.50/32
+        metric: 400
+        next-hop-address: 192.168.216.1
+        next-hop-interface: ens1f0.3516
+      - destination: 10.63.174.224/28
+        metric: 400
+        next-hop-address: 192.168.218.1
+        next-hop-interface: ens1f0.3518
+      - destination: 10.63.196.192/26
+        metric: 400
+        next-hop-address: 192.168.218.1
+        next-hop-interface: ens1f0.3518
+      - destination: 10.63.204.96/28
+        metric: 400
+        next-hop-address: 192.168.218.1
+        next-hop-interface: ens1f0.3518
+      - destination: 10.86.73.48/28
+        metric: 400
+        next-hop-address: 192.168.218.1
+        next-hop-interface: ens1f0.3518
+      - destination: 10.117.62.188/32
+        metric: 400
+        next-hop-address: 192.168.218.252
+        next-hop-interface: ens1f0.3518
+      - destination: 10.117.91.192/28
+        metric: 400
+        next-hop-address: 192.168.218.1
+        next-hop-interface: ens1f0.3518
+      - destination: 214.12.123.0/26
+        metric: 400
+        next-hop-address: 192.168.218.1
+        next-hop-interface: ens1f0.3518
+      - destination: 11.0.3.0/24
+        metric: 400
+        next-hop-address: 192.168.218.1
+        next-hop-interface: ens1f0.3518
+      - destination: 11.2.3.0/24
+        metric: 400
+        next-hop-address: 192.168.218.1
+        next-hop-interface: ens1f0.3518
+      - destination: 6.130.0.1/32
+        metric: 400
+        next-hop-address: 192.168.218.1
+        next-hop-interface: ens1f0.3518
+      - destination: 100.2.0.229/27
+        metric: 400
+        next-hop-address: 100.2.0.254
+        next-hop-interface: ens1f0.3518
+      - destination: 5.8.6.65/32
+        metric: 400
+        next-hop-address: 192.168.217.1
+        next-hop-interface: ens1f0.3517
+      - destination: 11.1.43.0/24
+        metric: 400
+        next-hop-address: 192.168.217.1
+        next-hop-interface: ens1f0.3517

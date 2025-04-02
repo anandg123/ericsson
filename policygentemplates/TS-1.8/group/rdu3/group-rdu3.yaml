@@ -1,0 +1,145 @@
+---
+apiVersion: ran.openshift.io/v1
+kind: PolicyGenTemplate
+metadata:
+  name: "group-rdu3-ts-1-8"
+  namespace: "ztp-group"
+spec:
+  bindingRules:
+    group: "rdu3"
+    version: TS-1.8
+  remediationAction: inform
+  sourceFiles:
+  # Configure auto sizing memory con control plane and standard nodes
+    - fileName: custom/system-reserved-memory.yaml
+      policyName: config
+      metadata:
+        name: autosizing-master
+      spec:
+        autoSizingReserved: true
+        machineConfigPoolSelector:
+          matchLabels:
+            pools.operator.machineconfiguration.openshift.io/master: ""
+    - fileName: custom/system-reserved-memory.yaml
+      policyName: config
+      metadata:
+        name: autosizing-standard
+      spec:
+        autoSizingReserved: true
+        machineConfigPoolSelector:
+          matchLabels:
+            pools.operator.machineconfiguration.openshift.io/standard: ""
+  # Chrony is customized on N62 and N65 labs, but is not in here
+
+  # Configure extra kernel modules on control-plane nodes
+    - fileName: ref/MachineConfigGeneric.yaml
+      policyName: config
+      complianceType: mustonlyhave
+      metadata:
+        name: 40-load-kernel-modules-master
+        annotations:
+          ran.openshift.io/ztp-deploy-wave: "10"
+        labels:
+          machineconfiguration.openshift.io/role: master
+      spec:
+        config:
+          # Release info found in https://github.com/coreos/butane/releases
+          ignition:
+            version: 3.2.0
+          storage:
+            files:
+            - contents:
+                source: data:,
+              mode: 420
+              overwrite: true
+              path: /etc/modprobe.d/kernel-blacklist.conf
+            - contents:
+                source: data:text/plain;charset=utf-8;base64,YnJfbmV0ZmlsdGVyCmJyaWRnZQppcDZfdGFibGVzCmlwNnRfUkVKRUNUCmlwNnRhYmxlX2ZpbHRlcgppcDZ0YWJsZV9tYW5nbGUKaXA2dGFibGVfbmF0CmlwNnRhYmxlX3JhdwppcF9ncmUKaXB0YWJsZV9maWx0ZXIKaXB0YWJsZV9tYW5nbGUKaXB0YWJsZV9uYXQKaXB0YWJsZV9yYXcKbmZfY29ubnRyYWNrCm5mX25hdApuZl9uYXRfcHJvdG9fc2N0cAp4dF9SRURJUkVDVAp4dF9UQ1BNU1MKeHRfYnBmCnh0X211bHRpcG9ydAp4dF9uYXQKeHRfb3duZXIKeHRfc3RhdGlzdGljCnh0X3UzMgo=
+              mode: 420
+              overwrite: true
+              path: /etc/modules-load.d/kernel-load.conf
+
+    # Configure extra kernel modules on worker nodes
+    - fileName: ref/MachineConfigGeneric.yaml
+      policyName: config
+      complianceType: mustonlyhave
+      metadata:
+        name: 40-load-kernel-modules-worker
+        annotations:
+          ran.openshift.io/ztp-deploy-wave: "10"
+        labels:
+          machineconfiguration.openshift.io/role: worker
+      spec:
+        config:
+          # Release info found in https://github.com/coreos/butane/releases
+          ignition:
+            version: 3.2.0
+          storage:
+            files:
+            - contents:
+                source: data:,
+              mode: 420
+              overwrite: true
+              path: /etc/modprobe.d/kernel-blacklist.conf
+            - contents:
+                source: data:text/plain;charset=utf-8;base64,YnJfbmV0ZmlsdGVyCmJyaWRnZQppcDZfdGFibGVzCmlwNnRfUkVKRUNUCmlwNnRhYmxlX2ZpbHRlcgppcDZ0YWJsZV9tYW5nbGUKaXA2dGFibGVfbmF0CmlwNnRhYmxlX3JhdwppcF9ncmUKaXB0YWJsZV9maWx0ZXIKaXB0YWJsZV9tYW5nbGUKaXB0YWJsZV9uYXQKaXB0YWJsZV9yYXcKbmZfY29ubnRyYWNrCm5mX25hdApuZl9uYXRfcHJvdG9fc2N0cAp4dF9SRURJUkVDVAp4dF9UQ1BNU1MKeHRfYnBmCnh0X211bHRpcG9ydAp4dF9uYXQKeHRfb3duZXIKeHRfc3RhdGlzdGljCnh0X3UzMgo=
+              mode: 420
+              overwrite: true
+              path: /etc/modules-load.d/kernel-load.conf
+
+    # Tuned profiles to configure pfcp-socket size and remove duplicated kernel arguments due to an automatic injection from NTO of intel_pstate kernel argument based on the CPU
+    - fileName: ref/TunedPerformancePatch.yaml
+      policyName: config
+      metadata:
+        name: custom-tuned-nodes
+        annotations:
+          ran.openshift.io/ztp-deploy-wave: "10"
+      spec:
+        profile:
+        - data: |
+            [main]
+            summary=Description of pfcp-socket-size profile 
+            include=openshift-control-plane
+            [bootloader]
+            cmdline=+skew_tick=1 tsc=reliable rcupdate.rcu_normal_after_boot=1 nohz=on processor.max_cstate=1 intel_idle.max_cstate=0 intel_pstate=passive
+            [sysctl]
+            net.core.rmem_max=8388608
+            net.core.wmem_max=8388608
+            net.core.rmem_default=238860
+            net.core.wmem_default=238860
+          name: custom-tuned-master
+        - data: |
+            [main]
+            summary=Description of pfcp-socket-size profile and removing duplicated cmdline kernel arguments
+            include=openshift-node
+            [bootloader]
+            cmdline=+skew_tick=1 tsc=reliable rcupdate.rcu_normal_after_boot=1 nohz=on processor.max_cstate=1 intel_idle.max_cstate=0 intel_pstate=passive
+            [sysctl]
+            kernel.printk=2
+            net.netfilter.nf_conntrack_tcp_be_liberal=1
+            net.core.rmem_max=8388608
+            net.core.wmem_max=8388608
+            net.core.rmem_default=238860
+            net.core.wmem_default=238860
+          name: custom-tuned-standard
+        recommend:
+        - machineConfigLabels:
+            machineconfiguration.openshift.io/role: "master"
+          priority: 10
+          profile: custom-tuned-master
+        - machineConfigLabels:
+            machineconfiguration.openshift.io/role: "standard"
+          priority: 20
+          profile: custom-tuned-standard
+    - fileName: custom/unsafeSysctls.yaml
+      policyName: config
+      spec:
+        machineConfigPoolSelector:
+          matchLabels:
+            machineconfiguration.openshift.io/role: standard
+        kubeletConfig:
+          allowedUnsafeSysctls:
+            - "net.ipv4.tcp_keepalive_intvl"
+            - "net.ipv4.tcp_keepalive_time"
+            - "net.ipv4.tcp_keepalive_probes"
+

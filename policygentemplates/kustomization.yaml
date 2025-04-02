@@ -1,0 +1,4 @@
+resources:
+- TS-1.8
+#- TS-1.6
+- ns.yaml

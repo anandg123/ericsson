@@ -1,0 +1,625 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/N65SiteConfig",
+  "definitions": {
+    "N65SiteConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "apiVersion": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/Metadata"
+        },
+        "spec": {
+          "$ref": "#/definitions/Spec"
+        }
+      },
+      "required": [
+        "apiVersion",
+        "kind",
+        "metadata",
+        "spec"
+      ],
+      "title": "N65SiteConfig"
+    },
+    "Metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "namespace"
+      ],
+      "title": "Metadata"
+    },
+    "Spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "baseDomain": {
+          "type": "string"
+        },
+        "pullSecretRef": {
+          "$ref": "#/definitions/PullSecretRef"
+        },
+        "clusterImageSetNameRef": {
+          "type": "string"
+        },
+        "sshPublicKey": {
+          "type": "string"
+        },
+        "clusters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          }
+        }
+      },
+      "required": [
+        "baseDomain",
+        "clusterImageSetNameRef",
+        "clusters",
+        "pullSecretRef",
+        "sshPublicKey"
+      ],
+      "title": "Spec"
+    },
+    "Cluster": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "clusterName": {
+          "type": "string"
+        },
+        "extraManifests": {
+          "$ref": "#/definitions/ExtraManifests"
+        },
+        "networkType": {
+          "type": "string"
+        },
+        "clusterLabels": {
+          "$ref": "#/definitions/ClusterLabels"
+        },
+        "clusterNetwork": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterNetwork"
+          }
+        },
+        "apiVIP": {
+          "type": "string"
+        },
+        "ingressVIP": {
+          "type": "string"
+        },
+        "serviceNetwork": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "additionalNTPSources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Node"
+          }
+        }
+      },
+      "required": [
+        "additionalNTPSources",
+        "apiVIP",
+        "clusterLabels",
+        "clusterName",
+        "clusterNetwork",
+        "extraManifests",
+        "ingressVIP",
+        "networkType",
+        "nodes",
+        "serviceNetwork"
+      ],
+      "title": "Cluster"
+    },
+    "ClusterLabels": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "common": {
+          "type": "boolean"
+        },
+        "sites": {
+          "type": "string"
+        },
+        "group": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "common",
+        "group",
+        "sites",
+        "version"
+      ],
+      "title": "ClusterLabels"
+    },
+    "ClusterNetwork": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cidr": {
+          "type": "string"
+        },
+        "hostPrefix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "cidr",
+        "hostPrefix"
+      ],
+      "title": "ClusterNetwork"
+    },
+    "ExtraManifests": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "searchPaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "searchPaths"
+      ],
+      "title": "ExtraManifests"
+    },
+    "Node": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hostName": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "bmcAddress": {
+          "type": "string"
+        },
+        "bmcCredentialsName": {
+          "$ref": "#/definitions/PullSecretRef"
+        },
+        "bootMACAddress": {
+          "type": "string"
+        },
+        "bootMode": {
+          "type": "string"
+        },
+        "rootDeviceHints": {
+          "$ref": "#/definitions/RootDeviceHints"
+        },
+        "nodeNetwork": {
+          "$ref": "#/definitions/NodeNetwork"
+        },
+        "nodeLabels": {
+          "$ref": "#/definitions/NodeLabels"
+        }
+      },
+      "required": [
+        "bmcAddress",
+        "bmcCredentialsName",
+        "bootMACAddress",
+        "bootMode",
+        "hostName",
+        "nodeNetwork",
+        "role",
+        "rootDeviceHints"
+      ],
+      "title": "Node"
+    },
+    "PullSecretRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "PullSecretRef"
+    },
+    "NodeLabels": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "node-role.kubernetes.io/standard": {
+          "type": "string"
+        },
+        "node-role.kubernetes.io/ht100gb": {
+          "type": "string"
+        }
+      },
+      "required": [],
+      "title": "NodeLabels"
+    },
+    "NodeNetwork": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeNetworkInterface"
+          }
+        },
+        "config": {
+          "$ref": "#/definitions/NodeNetworkConfig"
+        }
+      },
+      "required": [
+        "config",
+        "interfaces"
+      ],
+      "title": "NodeNetwork"
+    },
+    "NodeNetworkConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigInterface"
+          }
+        },
+        "dns-resolver": {
+          "$ref": "#/definitions/DNSResolver"
+        },
+        "routes": {
+          "$ref": "#/definitions/Routes"
+        }
+      },
+      "required": [
+        "dns-resolver",
+        "interfaces",
+        "routes"
+      ],
+      "title": "NodeNetworkConfig"
+    },
+    "DNSResolver": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "config": {
+          "$ref": "#/definitions/DNSResolverConfig"
+        }
+      },
+      "required": [
+        "config"
+      ],
+      "title": "DNSResolver"
+    },
+    "DNSResolverConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "server": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Server"
+          }
+        }
+      },
+      "required": [
+        "server"
+      ],
+      "title": "DNSResolverConfig"
+    },
+    "ConfigInterface": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/Type"
+        },
+        "state": {
+          "$ref": "#/definitions/State"
+        },
+        "ipv4": {
+          "$ref": "#/definitions/Ipv"
+        },
+        "ipv6": {
+          "$ref": "#/definitions/Ipv"
+        },
+        "mtu": {
+          "type": "integer"
+        },
+        "link-aggregation": {
+          "$ref": "#/definitions/LinkAggregation"
+        },
+        "description": {
+          "type": "string"
+        },
+        "vlan": {
+          "$ref": "#/definitions/VLAN"
+        }
+      },
+      "required": [
+        "ipv4",
+        "ipv6",
+        "name",
+        "state",
+        "type"
+      ],
+      "title": "ConfigInterface"
+    },
+    "Ipv": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "address": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Address"
+          }
+        },
+        "dhcp": {
+          "type": "boolean"
+        },
+        "autoconf": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "title": "Ipv"
+    },
+    "Address": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ip": {
+          "type": "string"
+        },
+        "prefix-length": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "ip",
+        "prefix-length"
+      ],
+      "title": "Address"
+    },
+    "LinkAggregation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "type": "string"
+        },
+        "options": {
+          "$ref": "#/definitions/Options"
+        },
+        "port": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "mode",
+        "options",
+        "port"
+      ],
+      "title": "LinkAggregation"
+    },
+    "Options": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "miimon": {
+          "type": "integer"
+        },
+        "lacp_rate": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "lacp_rate",
+        "miimon"
+      ],
+      "title": "Options"
+    },
+    "VLAN": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "base-iface": {
+          "$ref": "#/definitions/BaseIface"
+        },
+        "id": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "base-iface",
+        "id"
+      ],
+      "title": "VLAN"
+    },
+    "Routes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "config": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigElement"
+          }
+        }
+      },
+      "required": [
+        "config"
+      ],
+      "title": "Routes"
+    },
+    "ConfigElement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "destination": {
+          "type": "string"
+        },
+        "next-hop-address": {
+          "$ref": "#/definitions/NextHopAddress"
+        },
+        "next-hop-interface": {
+          "$ref": "#/definitions/NextHopInterface"
+        },
+        "metric": {
+          "type": "integer"
+        },
+        "table-id": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "destination",
+        "metric",
+        "next-hop-address",
+        "next-hop-interface",
+        "table-id"
+      ],
+      "title": "ConfigElement"
+    },
+    "NodeNetworkInterface": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "macAddress": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "macAddress",
+        "name"
+      ],
+      "title": "NodeNetworkInterface"
+    },
+    "RootDeviceHints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "deviceName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "deviceName"
+      ],
+      "title": "RootDeviceHints"
+    },
+    "Server": {
+      "type": "string",
+      "enum": [
+        "10.221.16.10",
+        "10.221.16.11"
+      ],
+      "title": "Server"
+    },
+    "State": {
+      "type": "string",
+      "enum": [
+        "up"
+      ],
+      "title": "State"
+    },
+    "Type": {
+      "type": "string",
+      "enum": [
+        "ethernet",
+        "bond",
+        "vlan"
+      ],
+      "title": "Type"
+    },
+    "BaseIface": {
+      "type": "string",
+      "enum": [
+        "bond0",
+	"bond1"
+      ],
+      "title": "BaseIface"
+    },
+    "NextHopAddress": {
+      "type": "string",
+      "enum": [
+	"10.0.69.1",
+	"10.0.69.193",
+	"214.12.121.1",
+	"214.12.121.65",
+	"172.21.160.1",
+	"172.21.163.1",
+	"172.21.176.1",
+	"172.21.179.1",
+	"172.21.192.1",
+	"172.21.195.1",
+	"214.12.99.129",
+	"100.2.0.254"
+      ],
+      "title": "NextHopAddress"
+    },
+    "NextHopInterface": {
+      "type": "string",
+      "enum": [
+        "bond0.10",
+        "bond0.11",
+	"bond0.20",
+	"bond0.41",
+        "bond0.2302",
+        "bond0.2303",
+        "bond0.2310",
+	"bond0.2372",
+	"bond0.2373",
+	"bond0.2380"
+      ],
+      "title": "NextHopInterface"
+    }
+  }
+}

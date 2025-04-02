@@ -1,0 +1,12 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: KubeletConfig
+metadata:
+  name: unsafe-sysctl-kubelet
+  annotations:
+    ran.openshift.io/ztp-deploy-wave: "10"
+spec:
+  machineConfigPoolSelector:
+    matchLabels:
+  kubeletConfig:
+    allowedUnsafeSysctls:
+

@@ -1,0 +1,12 @@
+generators:
+- common/common.yaml
+- group/rdu3/group-rdu3.yaml
+- sites/std-workload/std-workload-config.yaml
+- sites/std-workload/std-workload-network.yaml
+- sites/std-workload/std-workload-validator.yaml
+- sites/std-workload/std-workload-optimize-ztp-done.yaml
+- sites/geored-workload/geored-workload-config.yaml
+- sites/geored-workload/geored-workload-network.yaml
+- sites/geored-workload/geored-workload-validator.yaml
+- sites/geored-workload/geored-workload-optimize-ztp-done.yaml
+  #

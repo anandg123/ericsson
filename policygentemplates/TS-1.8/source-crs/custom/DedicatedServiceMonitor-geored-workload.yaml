@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-monitoring-config
+  namespace: openshift-monitoring
+  annotations:
+    ran.openshift.io/ztp-deploy-wave: "6"
+data:
+  config.yaml: |
+    k8sPrometheusAdapter:
+      dedicatedServiceMonitors:
+        enabled: true

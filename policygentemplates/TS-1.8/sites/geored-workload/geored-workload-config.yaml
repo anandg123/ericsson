@@ -1,0 +1,150 @@
+---
+apiVersion: ran.openshift.io/v1
+kind: PolicyGenTemplate
+metadata:
+  name: "geored-workload-ts-1.8"
+  namespace: "ztp-site"
+spec:
+  bindingRules:
+    sites: "geored-workload"
+    version: TS-1.8
+  sourceFiles:
+
+    ################
+    # config masters
+    ################
+    - fileName: custom/MastersSchedulable.yaml
+      policyName: config
+      spec:
+        mastersSchedulable: true
+
+    ################
+    # label nodes
+    ################
+    #ToDo: this could be done on day-0
+    - fileName: custom/LabelNode.yaml
+      policyName: config
+      metadata:
+        name: master0.geored-workload.geo2.site
+        labels:
+          cluster.ocs.openshift.io/openshift-storage: ''
+        annotations:
+          ran.openshift.io/ztp-deploy-wave: "6"
+    - fileName: custom/LabelNode.yaml
+      policyName: config
+      metadata:
+        name: master1.geored-workload.geo2.site
+        labels:
+          cluster.ocs.openshift.io/openshift-storage: ''
+        annotations:
+          ran.openshift.io/ztp-deploy-wave: "6"
+    - fileName: custom/LabelNode.yaml
+      policyName: config
+      metadata:
+        name: master2.geored-workload.geo2.site
+        labels:
+          cluster.ocs.openshift.io/openshift-storage: ''
+        annotations:
+          ran.openshift.io/ztp-deploy-wave: "6"
+
+    ################
+    # odf install
+    ################
+#    - fileName: custom/odf/ns.yaml
+#      policyName: subscriptions
+#    - fileName: custom/odf/operatorGroup.yaml
+#      policyName: subscriptions
+#    - fileName: custom/odf/subscription.yaml
+#      policyName: subscriptions
+#      spec:
+#        config:
+#          nodeSelector:
+#            node-role.kubernetes.io/master: ""
+#          tolerations:
+#          - effect: NoSchedule
+#            key: node-role.kubernetes.io/master
+
+    ################
+    # odf install
+    ################
+#    - fileName: custom/odf/external-ceph-secret.yaml
+#      policyName: config-operators
+#      metadata:
+#        name: rook-ceph-external-cluster-details
+#      data:
+#        external_cluster_details: WwogIHsKICAgICJuYW1lIjogInJvb2stY2VwaC1tb24tZW5kcG9pbnRzIiwKICAgICJraW5kIjogIkNvbmZpZ01hcCIsCiAgICAiZGF0YSI6IHsKICAgICAgImRhdGEiOiAiY2VwaDA9MTAuNDUuMTA3LjExOjY3ODkiLAogICAgICAibWF4TW9uSWQiOiAiMCIsCiAgICAgICJtYXBwaW5nIjogInt9IgogICAgfQogIH0sCiAgewogICAgIm5hbWUiOiAicm9vay1jZXBoLW1vbiIsCiAgICAia2luZCI6ICJTZWNyZXQiLAogICAgImRhdGEiOiB7CiAgICAgICJhZG1pbi1zZWNyZXQiOiAiYWRtaW4tc2VjcmV0IiwKICAgICAgImZzaWQiOiAiYjQzMWFjZmMtYjIyYy0xMWVmLThlNzMtOTQ2ZGFlNjk4YTJlIiwKICAgICAgIm1vbi1zZWNyZXQiOiAibW9uLXNlY3JldCIKICAgIH0KICB9LAogIHsKICAgICJuYW1lIjogInJvb2stY2VwaC1vcGVyYXRvci1jcmVkcyIsCiAgICAia2luZCI6ICJTZWNyZXQiLAogICAgImRhdGEiOiB7CiAgICAgICJ1c2VySUQiOiAiY2xpZW50Lm9jcyIsCiAgICAgICJ1c2VyS2V5IjogIkFRQUpMV0JuNUdONEFSQUFJUWVuNEhiMDBEZ1BzUlg0L21SSGF3PT0iCiAgICB9CiAgfSwKICB7CiAgICAibmFtZSI6ICJtb25pdG9yaW5nLWVuZHBvaW50IiwKICAgICJraW5kIjogIkNlcGhDbHVzdGVyIiwKICAgICJkYXRhIjogewogICAgICAiTW9uaXRvcmluZ0VuZHBvaW50IjogIjEwLjQ1LjEwNy4xMSIsCiAgICAgICJNb25pdG9yaW5nUG9ydCI6ICI5MjgzIgogICAgfQogIH0sCiAgewogICAgIm5hbWUiOiAicm9vay1jc2ktcmJkLW5vZGUiLAogICAgImtpbmQiOiAiU2VjcmV0IiwKICAgICJkYXRhIjogewogICAgICAidXNlcklEIjogImNzaS1yYmQtbm9kZSIsCiAgICAgICJ1c2VyS2V5IjogIkFRQUpMV0JuaVY3aUFSQUFuMmF6L0FTbk02ek02OUN6ejA2aHpBPT0iCiAgICB9CiAgfSwKICB7CiAgICAibmFtZSI6ICJyb29rLWNzaS1yYmQtcHJvdmlzaW9uZXIiLAogICAgImtpbmQiOiAiU2VjcmV0IiwKICAgICJkYXRhIjogewogICAgICAidXNlcklEIjogImNzaS1yYmQtcHJvdmlzaW9uZXIiLAogICAgICAidXNlcktleSI6ICJBUUFKTFdCblcrWkZBaEFBeWEyclJraEFSUmNkQjdaMjl5STRXQT09IgogICAgfQogIH0sCiAgewogICAgIm5hbWUiOiAicm9vay1jc2ktY2VwaGZzLXByb3Zpc2lvbmVyIiwKICAgICJraW5kIjogIlNlY3JldCIsCiAgICAiZGF0YSI6IHsKICAgICAgImFkbWluSUQiOiAiY3NpLWNlcGhmcy1wcm92aXNpb25lciIsCiAgICAgICJhZG1pbktleSI6ICJBUUFKTFdCbm9EY29BeEFBeWJWMlRBbDMySzM0OGJ0cXRvZ09kdz09IgogICAgfQogIH0sCiAgewogICAgIm5hbWUiOiAicm9vay1jc2ktY2VwaGZzLW5vZGUiLAogICAgImtpbmQiOiAiU2VjcmV0IiwKICAgICJkYXRhIjogewogICAgICAiYWRtaW5JRCI6ICJjc2ktY2VwaGZzLW5vZGUiLAogICAgICAiYWRtaW5LZXkiOiAiQVFBSkxXQm5hNXFyQWhBQUgvR213TEZYbnVSNXlXejRmNkhvRVE9PSIKICAgIH0KICB9LAogIHsKICAgICJuYW1lIjogInJvb2stY2VwaC1kYXNoYm9hcmQtbGluayIsCiAgICAia2luZCI6ICJTZWNyZXQiLAogICAgImRhdGEiOiB7CiAgICAgICJ1c2VySUQiOiAiY2VwaC1kYXNoYm9hcmQtbGluayIsCiAgICAgICJ1c2VyS2V5IjogImh0dHBzOi8vMTAuNDUuMTA3LjExOjg0NDMvIgogICAgfQogIH0sCiAgewogICAgIm5hbWUiOiAiY2VwaC1yYmQiLAogICAgImtpbmQiOiAiU3RvcmFnZUNsYXNzIiwKICAgICJkYXRhIjogewogICAgICAicG9vbCI6ICJvY3AtcmJkIiwKICAgICAgImNzaS5zdG9yYWdlLms4cy5pby9wcm92aXNpb25lci1zZWNyZXQtbmFtZSI6ICJyb29rLWNzaS1yYmQtcHJvdmlzaW9uZXIiLAogICAgICAiY3NpLnN0b3JhZ2UuazhzLmlvL2NvbnRyb2xsZXItZXhwYW5kLXNlY3JldC1uYW1lIjogInJvb2stY3NpLXJiZC1wcm92aXNpb25lciIsCiAgICAgICJjc2kuc3RvcmFnZS5rOHMuaW8vbm9kZS1zdGFnZS1zZWNyZXQtbmFtZSI6ICJyb29rLWNzaS1yYmQtbm9kZSIKICAgIH0KICB9LAogIHsKICAgICJuYW1lIjogImNlcGhmcyIsCiAgICAia2luZCI6ICJTdG9yYWdlQ2xhc3MiLAogICAgImRhdGEiOiB7CiAgICAgICJmc05hbWUiOiAiY2VwaGZzIiwKICAgICAgInBvb2wiOiAiY2VwaGZzX2RhdGEiLAogICAgICAiY3NpLnN0b3JhZ2UuazhzLmlvL3Byb3Zpc2lvbmVyLXNlY3JldC1uYW1lIjogInJvb2stY3NpLWNlcGhmcy1wcm92aXNpb25lciIsCiAgICAgICJjc2kuc3RvcmFnZS5rOHMuaW8vY29udHJvbGxlci1leHBhbmQtc2VjcmV0LW5hbWUiOiAicm9vay1jc2ktY2VwaGZzLXByb3Zpc2lvbmVyIiwKICAgICAgImNzaS5zdG9yYWdlLms4cy5pby9ub2RlLXN0YWdlLXNlY3JldC1uYW1lIjogInJvb2stY3NpLWNlcGhmcy1ub2RlIgogICAgfQogIH0sCiAgewogICAgIm5hbWUiOiAiY2VwaC1yZ3ciLAogICAgImtpbmQiOiAiU3RvcmFnZUNsYXNzIiwKICAgICJkYXRhIjogewogICAgICAiZW5kcG9pbnQiOiAiMTAuNDUuMTA3LjExOjgwIiwKICAgICAgInBvb2xQcmVmaXgiOiAiZGVmYXVsdCIKICAgIH0KICB9LAogIHsKICAgICJuYW1lIjogInJndy1hZG1pbi1vcHMtdXNlciIsCiAgICAia2luZCI6ICJTZWNyZXQiLAogICAgImRhdGEiOiB7CiAgICAgICJhY2Nlc3NLZXkiOiAiTEpEQjNETTFBR1M1MzEzRlFDWVIiLAogICAgICAic2VjcmV0S2V5IjogIjN4Y2FqSkRlbVBkc1FUQ1lVVEZjTWFkbm5ydHRSb1lRaGc2elJXRTAiCiAgICB9CiAgfQpdCg==
+#    - fileName: custom/odf/odf-storage-cluster.yaml
+#      policyName: config-operators
+    # - fileName: custom/odf/odf-storage-class.yaml
+    #   policyName: config-operators
+
+    ################
+    # ht-nodes
+    ################
+    # Performance profile
+    # - fileName: ref/PerformanceProfile.yaml
+    #   policyName: config-operators
+    #   complianceType: mustonlyhave
+    #   metadata:
+    #     name: ht100gb
+    #     annotations:
+    #       ran.openshift.io/ztp-deploy-wave: "9"
+    #       kubeletconfig.experimental: |
+    #         {"systemReserved": {"memory": "8Gi"}, "topologyManagerScope": "pod"}
+    #   spec:
+    #     additionalKernelArgs:
+    #     - "intel_pstate=passive"
+    #     cpu:
+    #       isolated: "2-31,66-95,34-63,98-127"
+    #       reserved: "0-1,64-65,32-33,96-97"
+    #     globallyDisableIrqLoadBalancing: false
+    #     hugepages:
+    #       defaultHugepagesSize: 1G
+    #       pages:
+    #         - size: 1G
+    #           node: 0
+    #           count: 12
+    #         - size: 1G
+    #           node: 1
+    #           count: 12
+    #     net:
+    #       devices:
+    #       - interfaceName: ens18*
+    #       userLevelNetworking: true
+    #     numa:
+    #       topologyPolicy: single-numa-node
+    #     workloadHints:
+    #       realTime: false
+    #       highPowerConsumption: true
+    #       perPodPowerManagement: false
+    #     realTimeKernel:
+    #       enabled: false
+    #     machineConfigPoolSelector:
+    #       pools.operator.machineconfiguration.openshift.io/ht100gb: ""
+    #     nodeSelector:
+    #       node-role.kubernetes.io/ht100gb: ''
+
+    # Tuned config to remove a duplicated entry in /proc/cmdline due to a new featue on NTO on OCP 4.16 which add automatically intel_pstate entry based on de info of the current CPU
+    # - fileName: ref/TunedPerformancePatch.yaml
+    #   policyName: config-operators
+    #   metadata:
+    #     name: custom-tuned-ht100gb
+    #     annotations:
+    #       ran.openshift.io/ztp-deploy-wave: "9"
+    #   spec:
+    #     profile:
+    #     - data: |
+    #         [main]
+    #         summary=Custom OpenShift node tuned profile removing a duplicate kernel parameter
+    #         include=openshift-node-performance-ht100gb
+    #         [bootloader]
+    #         cmdline_remove_pstate=-intel_pstate=${automatic_pstate}
+    #       name: custom-tuned-ht100gb
+    #     recommend:
+    #     - machineConfigLabels:
+    #         machineconfiguration.openshift.io/role: "ht100gb"
+    #       priority: 10
+    #       profile: custom-tuned-ht100gb
+    
+    - fileName: custom/DedicatedServiceMonitor-geored-workload.yaml
+      policyName: config
