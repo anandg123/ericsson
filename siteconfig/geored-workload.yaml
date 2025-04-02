@@ -46,7 +46,7 @@ spec:
         role: "master"
         nodeLabels:
           node-role.kubernetes.io/standard: ""
-        bmcAddress: "redfish-virtualmedia://10.188.25.38/redfish/v1/Systems/1"
+        bmcAddress: "redfish-virtualmedia://10.188.1.38/redfish/v1/Systems/1"
         bmcCredentialsName:
           name: "ipmi-secret"
         bootMACAddress: "1c:98:ec:60:f7:20" #doubt
@@ -126,7 +126,7 @@ spec:
         role: "master"
         nodeLabels:
           node-role.kubernetes.io/standard: ""
-        bmcAddress: "redfish-virtualmedia://10.188.25.39/redfish/v1/Systems/1"
+        bmcAddress: "redfish-virtualmedia://10.188.1.39/redfish/v1/Systems/1"
         bmcCredentialsName:
           name: "ipmi-secret"
         bootMACAddress: "1c:98:ec:60:18:20"
@@ -206,7 +206,7 @@ spec:
         role: "master"
         nodeLabels:
           node-role.kubernetes.io/standard: ""
-        bmcAddress: "redfish-virtualmedia://10.188.25.40/redfish/v1/Systems/1"
+        bmcAddress: "redfish-virtualmedia://10.188.1.40/redfish/v1/Systems/1"
         bmcCredentialsName:
           name: "ipmi-secret"
         bootMACAddress: "1c:98:ec:60:d7:c0" 
