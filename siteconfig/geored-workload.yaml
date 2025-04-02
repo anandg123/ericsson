@@ -34,8 +34,8 @@ spec:
     clusterNetwork:
       - cidr: 10.128.0.0/14
         hostPrefix: 23
-    apiVIP: 10.188.23.222 
-    ingressVIP: 10.188.23.223 
+    apiVIP: 10.188.25.222 
+    ingressVIP: 10.188.25.223 
     serviceNetwork:
       - 172.30.0.0/16
     additionalNTPSources:
