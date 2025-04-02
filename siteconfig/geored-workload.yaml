@@ -9,7 +9,7 @@ spec:
   pullSecretRef:
     name: "pull-secret"
   clusterImageSetNameRef: "img4.16.36-x86-64-appsub"
-  sshPublicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILpNZH+8GhobH2RI0VHzZ2W0/TcDq3Nb/L/1EOkwc2R9 root@fc45-ericsson-bastion.ocp.local"
+  sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC6WwROwAxk9K5RbDt3b6FEP4WWuRGA4JU5G2j6mq8N2I8l3IMw9A/UF5oeCrKUBJWna3jDK7KpDNKkaKiAhlSU3jAHi5tLQyWmWFijKXYFLOotN9o3vYTktXgcf9B0g6aFqI95qKDxjofj6mcPPfQLPV9Na60PP9B0gBJWF6RUQZy+DYiGeeAueaeTjsM3Y0tvEjMDmWCh57IPMIqsoOpaX+uAMgMu4TxcQvUw8Sh5Al8zhgz+LIg1tAGQAd23jsLnL5K6z+ol0XKq8Qn2ddfOttFCFnVyYs+pcC820MbVp9O7XpaeU8lXaJLpf6jdlRz9VANASdmMLhX6/DpsDqfAmoy++yJQH6Z6fl0OhWuvYpwPFTOm5xWwtbOOiWdA2gT9c5Etl6N/Yl4BaPftCDn9Sk84r+oqtbvYJ79PjVINh/kKtnQwWDNGjyZ7WjaMnf/457ciEOo9YaOEqcnBZSoqkNDOlAB0T4Yq7W/LOIV989M9DrOIMv9uEBomC69ZYm8= root@rhel9rishi"
   clusters:
   - clusterName: "geored-workload"
     extraManifests:
@@ -46,7 +46,7 @@ spec:
         role: "master"
         nodeLabels:
           node-role.kubernetes.io/standard: ""
-        bmcAddress: "redfish-virtualmedia://10.188.25.38/redfish/v1/Systems/1"
+        bmcAddress: "redfish-virtualmedia://10.188.1.38/redfish/v1/Systems/1"
         bmcCredentialsName:
           name: "ipmi-secret"
         bootMACAddress: "1c:98:ec:60:f7:20" #doubt
@@ -126,7 +126,7 @@ spec:
         role: "master"
         nodeLabels:
           node-role.kubernetes.io/standard: ""
-        bmcAddress: "redfish-virtualmedia://10.188.25.39/redfish/v1/Systems/1"
+        bmcAddress: "redfish-virtualmedia://10.188.1.39/redfish/v1/Systems/1"
         bmcCredentialsName:
           name: "ipmi-secret"
         bootMACAddress: "1c:98:ec:60:18:20"
@@ -206,7 +206,7 @@ spec:
         role: "master"
         nodeLabels:
           node-role.kubernetes.io/standard: ""
-        bmcAddress: "redfish-virtualmedia://10.188.25.40/redfish/v1/Systems/1"
+        bmcAddress: "redfish-virtualmedia://10.188.1.40/redfish/v1/Systems/1"
         bmcCredentialsName:
           name: "ipmi-secret"
         bootMACAddress: "1c:98:ec:60:d7:c0" 
