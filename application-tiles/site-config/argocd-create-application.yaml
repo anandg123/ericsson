@@ -12,7 +12,7 @@ spec:
   project: site-config-project
   source:
     path: siteconfig/
-    repoURL: https://10.188.44.153/gitlab/root/ericsson.git
+    repoURL: https://github.com/anandg123/ericsson.git
     targetRevision: main
   syncPolicy:
     automated:
