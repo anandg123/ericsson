@@ -3,7 +3,7 @@ kind: Kustomization
 
 generators:
 #- std-workload.yaml
-- geored-workload.yaml
+- geored-workload-sno.yaml
 
 resources:
   - pre-reqs/
