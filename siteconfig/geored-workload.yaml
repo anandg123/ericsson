@@ -100,7 +100,7 @@ spec:
                 mtu: 9000
                 vlan:
                   base-iface: bond0
-                  id: 24 
+                  id: 23 
                 ipv4:
                   enabled: true
                   address:
@@ -180,7 +180,7 @@ spec:
                 mtu: 9000
                 vlan:
                   base-iface: bond0
-                  id: 24
+                  id: 23
                 ipv4:
                   enabled: true
                   address:
@@ -260,7 +260,7 @@ spec:
                 mtu: 9000
                 vlan:
                   base-iface: bond0
-                  id: 24
+                  id: 23
                 ipv4:
                   enabled: true
                   address:
