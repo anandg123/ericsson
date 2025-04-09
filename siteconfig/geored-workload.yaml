@@ -34,8 +34,8 @@ spec:
     clusterNetwork:
       - cidr: 10.128.0.0/14
         hostPrefix: 23
-    apiVIP: 10.188.25.222 
-    ingressVIP: 10.188.25.223 
+    apiVIP: 10.188.22.222 
+    ingressVIP: 10.188.22.223 
     serviceNetwork:
       - 172.30.0.0/16
     additionalNTPSources:
@@ -93,18 +93,18 @@ spec:
                   port:
                     - ens10f0np0
                     - ens10f1np1
-              - name: bond0.23 
+              - name: bond0.22 
                 description: node-mgmt geo2.site
                 type: vlan
                 state: up
                 mtu: 9000
                 vlan:
                   base-iface: bond0
-                  id: 23 
+                  id: 22
                 ipv4:
                   enabled: true
                   address:
-                    - ip: 10.188.23.38 
+                    - ip: 10.188.22.38 
                       prefix-length: 24
                   dhcp: false
                 ipv6:
@@ -118,8 +118,8 @@ spec:
             routes:
               config:
               - destination: 0.0.0.0/0
-                next-hop-interface: bond0.23 
-                next-hop-address: 10.188.23.1
+                next-hop-interface: bond0.22 
+                next-hop-address: 10.188.22.1
                 table-id: 254
 
       - hostName: "master1.geored-workload.geo2.site"
@@ -173,18 +173,18 @@ spec:
                   port:
                     - ens10f0np0
                     - ens10f1np1
-              - name: bond0.23 
+              - name: bond0.22
                 description: node-mgmt geo2.site
                 type: vlan
                 state: up
                 mtu: 9000
                 vlan:
                   base-iface: bond0
-                  id: 23
+                  id: 22
                 ipv4:
                   enabled: true
                   address:
-                    - ip: 10.188.23.39
+                    - ip: 10.188.22.39
                       prefix-length: 24
                   dhcp: false
                 ipv6:
@@ -198,8 +198,8 @@ spec:
             routes:
               config:
               - destination: 0.0.0.0/0
-                next-hop-interface: bond0.23 
-                next-hop-address: 10.188.23.1 
+                next-hop-interface: bond0.22
+                next-hop-address: 10.188.22.1 
                 table-id: 254
 
       - hostName: "master2.geored-workload.geo2.site"
@@ -253,18 +253,18 @@ spec:
                   port:
                     - ens10f0np0
                     - ens10f1np1
-              - name: bond0.23 
+              - name: bond0.22
                 description: node-mgmt geo2.site
                 type: vlan
                 state: up
                 mtu: 9000
                 vlan:
                   base-iface: bond0
-                  id: 23
+                  id: 22
                 ipv4:
                   enabled: true
                   address:
-                    - ip: 10.188.23.40
+                    - ip: 10.188.22.40
                       prefix-length: 24
                   dhcp: false
                 ipv6:
@@ -278,6 +278,6 @@ spec:
             routes:
               config:
               - destination: 0.0.0.0/0
-                next-hop-interface: bond0.23 
-                next-hop-address: 10.188.23.1
+                next-hop-interface: bond0.22 
+                next-hop-address: 10.188.22.1
                 table-id: 254
