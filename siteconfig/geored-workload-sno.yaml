@@ -76,11 +76,9 @@ spec:
                 ipv4:
                   enabled: false
                   dhcp: false
-                  autoconf: false
                 ipv6:
                   enabled: false
                   dhcp: false
-                  autoconf: false
               - name: eno5np0.23
                 description: node-mgmt geo2.site
                 type: vlan
