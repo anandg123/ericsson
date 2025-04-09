@@ -6,6 +6,10 @@ metadata:
   namespace: "geored-workload"
 spec:
   baseDomain: "geo2.site"
+    #  proxy:
+    #    httpProxy: http://10.78.90.46:8080
+    #    httpsProxy: http://10.78.90.46:8080
+    #    noProxy: 127.0.0.1,.sse.com,10.188.25.0/24,assisted-image-service-multicluster-engine.apps.rhocp.sse.com,.rhocp.sse.com,rhocp.sse.com,sse.com,10.188.25.18,10.188.25.19,10.188.25.20,10.188.25.11,10.188.25.201,10.188.25.1,10.128.0.0/14,172.30.0.0/16,10.188.25.122,10.188.25.123,localhost,10.188.25.64/26,.rhocp.sse.com,10.128.0.0/14,172.30.0.0/16,10.188.25.0/24,10.188.44.153,10.188.1.38,10.188.1.39,10.188.1.40,.geored-workload.geo2.site,.geo2.site,geored-workload.geo2.site,geo2.site,10.188.23.222,10.188.23.223,10.188.19.0/24,10.188.20.0/24,10.188.23.0/24,10.188.26.0/24,10.188.24.0/24,10.188.25.222,10.188.25.223,10.128.0.0/14,172.30.223.117,10.188.1.147,10.188.1.148,10.188.1.151,10.128.0.109,10.129.0.123    
   pullSecretRef:
     name: "pull-secret"
   clusterImageSetNameRef: "img4.16.38-x86-64-appsub"
@@ -42,6 +46,10 @@ spec:
       - 172.30.0.0/16
     additionalNTPSources:
       - 10.188.25.201
+    proxy:
+      httpProxy: http://10.78.90.46:8080
+      httpsProxy: http://10.78.90.46:8080
+      noProxy: 127.0.0.1,.sse.com,10.188.25.0/24,assisted-image-service-multicluster-engine.apps.rhocp.sse.com,.rhocp.sse.com,.sse.com,10.188.25.18,10.188.25.19,10.188.25.20,10.188.25.11,10.188.25.201,10.188.25.1,10.128.0.0/14,172.30.0.0/16,10.188.25.122,10.188.25.123,localhost,10.188.25.64/26,.rhocp.sse.com,10.128.0.0/14,172.30.0.0/16,10.188.25.0/24,10.188.44.153,10.188.1.38,10.188.1.39,10.188.1.40,.geored-workload.geo2.site,.geo2.site,.apps.geored-workload.geo2.site,geo2.site,10.188.23.222,10.188.23.223,10.188.19.0/24,10.188.20.0/24,10.188.23.0/24,10.188.26.0/24,10.188.24.0/24,10.188.25.222,10.188.25.223,10.128.0.0/14,172.30.223.117,10.188.1.147,10.188.1.148,10.188.1.151,10.128.0.109,10.129.0.123 
         #    holdInstallation: false    
     nodes:
       - hostName: "master0.geored-workload.geo2.site"
@@ -66,6 +74,22 @@ spec:
                 type: ethernet
                 state: up
                 ipv4:
+                  enabled: false
+                  dhcp: false
+                  autoconf: false
+                ipv6:
+                  enabled: false
+                  dhcp: false
+                  autoconf: false
+              - name: eno5np0.23
+                description: node-mgmt geo2.site
+                type: vlan
+                state: up
+                mtu: 9000
+                vlan:
+                  base-iface: eno5np0
+                  id: 23
+                ipv4:
                   enabled: true
                   address:
                     - ip: 10.188.23.38
@@ -73,6 +97,8 @@ spec:
                   dhcp: false
                 ipv6:
                   enabled: false
+                  dhcp: false
+                  autoconf: false
             dns-resolver:
               config:
                 server:
@@ -80,6 +106,6 @@ spec:
             routes:
               config:
               - destination: 0.0.0.0/0
-                next-hop-interface: eno5np0
+                next-hop-interface: eno5np0.23
                 next-hop-address: 10.188.23.1
                 table-id: 254
