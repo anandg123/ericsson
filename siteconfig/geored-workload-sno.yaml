@@ -41,7 +41,7 @@ spec:
 #    apiVIP: 10.188.25.222 
 #    ingressVIP: 10.188.25.223
     machineNetwork:
-      - cidr: 10.188.23.0/24
+      - cidr: 10.188.2.0/24
     serviceNetwork:
       - 172.30.0.0/16
     additionalNTPSources:
