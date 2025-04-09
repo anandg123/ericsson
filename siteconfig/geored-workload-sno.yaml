@@ -101,6 +101,7 @@ spec:
               config:
                 server:
                 - 10.188.25.11
+                - 10.188.22.2
             routes:
               config:
               - destination: 0.0.0.0/0
