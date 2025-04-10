@@ -6,11 +6,11 @@ metadata:
   namespace: "geored-workload"
 spec:
   baseDomain: "geo2.site"
-  proxy:
-    httpProxy: http://10.78.90.46:8080
-    httpsProxy: http://10.78.90.46:8080
-    noProxy: 127.0.0.1,.sse.com,.rhocp.sse.com,.sse.com,10.128.0.0/14,172.30.0.0/16,localhost,10.188.25.0/24,.geored-workload.geo2.site,.apps.geored-workload.geo2.site,geo2.site,10.188.2.15,10.188.2.0/24,10.188.22.0/24,10.188.22.180
-  pullSecretRef:
+    #  proxy:
+    #    httpProxy: http://10.78.90.46:8080
+    #    httpsProxy: http://10.78.90.46:8080
+    #    noProxy: 127.0.0.1,.sse.com,.rhocp.sse.com,.sse.com,10.128.0.0/14,172.30.0.0/16,localhost,10.188.25.0/24,.geored-workload.geo2.site,.apps.geored-workload.geo2.site,geo2.site,10.188.2.15,10.188.2.0/24,10.188.22.0/24,10.188.22.180
+    #  pullSecretRef:
     name: "pull-secret"
   clusterImageSetNameRef: "img4.16.38-x86-64-appsub"
   sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC6WwROwAxk9K5RbDt3b6FEP4WWuRGA4JU5G2j6mq8N2I8l3IMw9A/UF5oeCrKUBJWna3jDK7KpDNKkaKiAhlSU3jAHi5tLQyWmWFijKXYFLOotN9o3vYTktXgcf9B0g6aFqI95qKDxjofj6mcPPfQLPV9Na60PP9B0gBJWF6RUQZy+DYiGeeAueaeTjsM3Y0tvEjMDmWCh57IPMIqsoOpaX+uAMgMu4TxcQvUw8Sh5Al8zhgz+LIg1tAGQAd23jsLnL5K6z+ol0XKq8Qn2ddfOttFCFnVyYs+pcC820MbVp9O7XpaeU8lXaJLpf6jdlRz9VANASdmMLhX6/DpsDqfAmoy++yJQH6Z6fl0OhWuvYpwPFTOm5xWwtbOOiWdA2gT9c5Etl6N/Yl4BaPftCDn9Sk84r+oqtbvYJ79PjVINh/kKtnQwWDNGjyZ7WjaMnf/457ciEOo9YaOEqcnBZSoqkNDOlAB0T4Yq7W/LOIV989M9DrOIMv9uEBomC69ZYm8= root@rhel9rishi"
@@ -46,10 +46,10 @@ spec:
       - 172.30.0.0/16
     additionalNTPSources:
       - 10.188.25.201
-        #    proxy:
-        #      httpProxy: http://10.78.90.46:8080
-        #      httpsProxy: http://10.78.90.46:8080
-        #      noProxy: 127.0.0.1,.sse.com,.rhocp.sse.com,.sse.com,10.128.0.0/14,172.30.0.0/16,localhost,10.188.25.0/24,.geored-workload.geo2.site,.apps.geored-workload.geo2.site,geo2.site,10.188.2.15,10.188.2.0/24,10.188.22.0/24,10.188.22.180        
+    proxy:
+      httpProxy: "http://10.78.90.46:8080"
+      httpsProxy: "http://10.78.90.46:8080"
+      noProxy: "127.0.0.1,.sse.com,.rhocp.sse.com,.sse.com,10.128.0.0/14,172.30.0.0/16,localhost,10.188.25.0/24,.geored-workload.geo2.site,.apps.geored-workload.geo2.site,geo2.site,10.188.2.15,10.188.2.0/24,10.188.22.0/24,10.188.22.180"
 #    proxy:
 #      httpProxy: http://10.78.90.46:8080
 #      httpsProxy: http://10.78.90.46:8080
