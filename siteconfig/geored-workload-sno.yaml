@@ -46,6 +46,10 @@ spec:
       - 172.30.0.0/16
     additionalNTPSources:
       - 10.188.25.201
+    proxy:
+      httpProxy: http://10.78.90.46:8080
+      httpsProxy: http://10.78.90.46:8080
+      noProxy: 127.0.0.1,.sse.com,.rhocp.sse.com,.sse.com,10.128.0.0/14,172.30.0.0/16,localhost,10.188.25.0/24,.geored-workload.geo2.site,.apps.geored-workload.geo2.site,geo2.site,10.188.2.15,10.188.2.0/24,10.188.22.0/24,10.188.22.180        
 #    proxy:
 #      httpProxy: http://10.78.90.46:8080
 #      httpsProxy: http://10.78.90.46:8080
@@ -68,22 +72,11 @@ spec:
           interfaces:
             - name: eno5np0
               macAddress: "b8:83:03:70:04:f0"
-            - name: enp1s0f4u4
-              macAddress: "22:c8:81:8d:e6:d5"                
           config:
             interfaces:
               - name: eno5np0
                 type: ethernet
                 state: up
-                ipv4:
-                  enabled: false
-                  dhcp: false
-                ipv6:
-                  enabled: false
-                  dhcp: false
-              - name: enp1s0f4u4
-                type: ethernet
-                state: false
                 ipv4:
                   enabled: false
                   dhcp: false
