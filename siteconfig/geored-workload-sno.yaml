@@ -68,11 +68,22 @@ spec:
           interfaces:
             - name: eno5np0
               macAddress: "b8:83:03:70:04:f0"
+            - name: enp1s0f4u4
+              macAddress: "22:c8:81:8d:e6:d5"                
           config:
             interfaces:
               - name: eno5np0
                 type: ethernet
                 state: up
+                ipv4:
+                  enabled: false
+                  dhcp: false
+                ipv6:
+                  enabled: false
+                  dhcp: false
+              - name: enp1s0f4u4
+                type: ethernet
+                state: false
                 ipv4:
                   enabled: false
                   dhcp: false
