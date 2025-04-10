@@ -6,10 +6,10 @@ metadata:
   namespace: "geored-workload"
 spec:
   baseDomain: "geo2.site"
-  proxy:
-    httpProxy: http://10.78.90.46:8080
-    httpsProxy: http://10.78.90.46:8080
-    noProxy: 127.0.0.1,.sse.com,.rhocp.sse.com,.sse.com,10.128.0.0/14,172.30.0.0/16,localhost,10.188.25.0/24,.geored-workload.geo2.site,.apps.geored-workload.geo2.site,geo2.site,10.188.2.15,10.188.2.0/24,10.188.22.0/24,10.188.22.180
+    #  proxy:
+    #    httpProxy: http://10.78.90.46:8080
+    #    httpsProxy: http://10.78.90.46:8080
+    #    noProxy: 127.0.0.1,.sse.com,.rhocp.sse.com,.sse.com,10.128.0.0/14,172.30.0.0/16,localhost,10.188.25.0/24,.geored-workload.geo2.site,.apps.geored-workload.geo2.site,geo2.site,10.188.2.15,10.188.2.0/24,10.188.22.0/24,10.188.22.180
   pullSecretRef:
     name: "pull-secret"
   clusterImageSetNameRef: "img4.16.38-x86-64-appsub"
