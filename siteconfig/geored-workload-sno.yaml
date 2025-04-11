@@ -28,9 +28,9 @@ spec:
       #       - 78-enable-crun-ht100gb.yaml
     networkType: "OVNKubernetes"
     proxy:
-      httpProxy: http://10.78.90.46:80
-      httpsProxy: http://10.78.90.46:80
-      noProxy: 127.0.0.1,.sse.com,.rhocp.sse.com,.sse.com,10.128.0.0/14,172.30.0.0/16,localhost,10.188.25.0/24,.geored-workload.geo2.site,.apps.geored-workload.geo2.site,geo2.site,10.188.2.15,10.188.2.0/24,10.188.22.0/24,10.188.22.180      
+      httpProxy: http://10.78.90.46:8080
+      httpsProxy: http://10.78.90.46:8080
+      noProxy: '127.0.0.1,.apps.rhocp.sse.com,.rhocp.sse.com,localhost,.sse.com,172.30.0.0/16,10.188.25.0/24,.geored-workload.geo2.site,.geo2.site,.apps.geored-workload.geo2.site,10.188.19.0/24,10.188.20.0/24,10.188.23.0/24,10.188.26.0/24,10.188.24.0/24,10.128.0.0/14,10.188.1.0/24,10.188.2.0/24,10.188.22.0/24'
     clusterLabels:
       common: true
       group-core-standard: ""
