@@ -50,8 +50,8 @@ spec:
       - 172.30.0.0/16
     additionalNTPSources:
       - 10.188.25.201
-    crTemplates:
-      InfraEnv: "infraenv.yaml"        
+        #    crTemplates:
+        #      InfraEnv: "infraenv.yaml"        
         #    proxy:
         #      httpProxy: "http://10.78.90.46:8080"
         #      httpsProxy: "http://10.78.90.46:8080"
