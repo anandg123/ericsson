@@ -44,6 +44,7 @@ spec:
       - 172.30.0.0/16
     additionalNTPSources:
       - 10.188.25.201
+      - 16.110.135.123
         #    holdInstallation: false    
     nodes:
       - hostName: "master0.geored-workload.geo2.site"
