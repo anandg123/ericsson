@@ -75,18 +75,35 @@ spec:
                   enabled: false
               - name: ens10f1np1
                 type: ethernet
-                state: down
+                state: up
                 ipv4:
                   enabled: false
                 ipv6:
                   enabled: false
-              - name: ens10f0np0.22 
+              - name: bond0
+                type: bond
+                state: up
+                mtu: 9000
+                mac-address: "e4:3d:1a:60:70:f8"
+                ipv4:
+                  enabled: false
+                ipv6:
+                  enabled: false
+                link-aggregation:
+                  mode: 802.3ad
+                  options:
+                    miimon: 100
+                    lacp_rate: slow
+                  port:
+                    - ens10f0np0
+                    - ens10f1np1
+              - name: bond0.22 
                 description: node-mgmt geo2.site
                 type: vlan
                 state: up
                 mtu: 9000
                 vlan:
-                  base-iface: ens10f0np0
+                  base-iface: bond0
                   id: 22
                 ipv4:
                   enabled: true
@@ -106,7 +123,7 @@ spec:
             routes:
               config:
               - destination: 0.0.0.0/0
-                next-hop-interface: ens10f0np0.22 
+                next-hop-interface: bond0.22 
                 next-hop-address: 10.188.22.1
                 table-id: 254
 
@@ -139,18 +156,35 @@ spec:
                   enabled: false
               - name: ens10f1np1
                 type: ethernet
-                state: down
+                state: up
                 ipv4:
                   enabled: false
                 ipv6:
                   enabled: false
-              - name: ens10f0np0.22
+              - name: bond0
+                type: bond
+                state: up
+                mtu: 9000
+                mac-address: "e4:3d:1a:60:43:44"
+                ipv4:
+                  enabled: false
+                ipv6:
+                  enabled: false
+                link-aggregation:
+                  mode: 802.3ad
+                  options:
+                    miimon: 100
+                    lacp_rate: slow
+                  port:
+                    - ens10f0np0
+                    - ens10f1np1
+              - name: bond0.22
                 description: node-mgmt geo2.site
                 type: vlan
                 state: up
                 mtu: 9000
                 vlan:
-                  base-iface: ens10f0np0
+                  base-iface: bond0
                   id: 22
                 ipv4:
                   enabled: true
@@ -167,10 +201,11 @@ spec:
                 server:
                 - 10.188.25.11
                 - 10.188.22.2
+                - 10.188.22.3
             routes:
               config:
               - destination: 0.0.0.0/0
-                next-hop-interface: ens10f0np0.22
+                next-hop-interface: bond0.22
                 next-hop-address: 10.188.22.1 
                 table-id: 254
 
@@ -203,18 +238,35 @@ spec:
                   enabled: false
               - name: ens10f1np1
                 type: ethernet
-                state: down
+                state: up
                 ipv4:
                   enabled: false
                 ipv6:
                   enabled: false
-              - name: ens10f0np0.22
+              - name: bond0
+                type: bond
+                state: up
+                mtu: 9000
+                mac-address: "e4:3d:1a:60:a2:0c"
+                ipv4:
+                  enabled: false
+                ipv6:
+                  enabled: false
+                link-aggregation:
+                  mode: 802.3ad
+                  options:
+                    miimon: 100
+                    lacp_rate: slow
+                  port:
+                    - ens10f0np0
+                    - ens10f1np1
+              - name: bond0.22
                 description: node-mgmt geo2.site
                 type: vlan
                 state: up
                 mtu: 9000
                 vlan:
-                  base-iface: ens10f0np0
+                  base-iface: bond0
                   id: 22
                 ipv4:
                   enabled: true
@@ -231,9 +283,10 @@ spec:
                 server:
                 - 10.188.25.11
                 - 10.188.22.2
+                - 10.188.22.3
             routes:
               config:
               - destination: 0.0.0.0/0
-                next-hop-interface: ens10f0np0.22 
+                next-hop-interface: bond0.22 
                 next-hop-address: 10.188.22.1
                 table-id: 254
