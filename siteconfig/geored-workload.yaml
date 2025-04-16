@@ -8,7 +8,7 @@ spec:
   baseDomain: "geo2.site"
   pullSecretRef:
     name: "pull-secret"
-  clusterImageSetNameRef: "img4.16.36-x86-64-appsub"
+  clusterImageSetNameRef: "img4.16.37-x86-64-appsub"
   sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC6WwROwAxk9K5RbDt3b6FEP4WWuRGA4JU5G2j6mq8N2I8l3IMw9A/UF5oeCrKUBJWna3jDK7KpDNKkaKiAhlSU3jAHi5tLQyWmWFijKXYFLOotN9o3vYTktXgcf9B0g6aFqI95qKDxjofj6mcPPfQLPV9Na60PP9B0gBJWF6RUQZy+DYiGeeAueaeTjsM3Y0tvEjMDmWCh57IPMIqsoOpaX+uAMgMu4TxcQvUw8Sh5Al8zhgz+LIg1tAGQAd23jsLnL5K6z+ol0XKq8Qn2ddfOttFCFnVyYs+pcC820MbVp9O7XpaeU8lXaJLpf6jdlRz9VANASdmMLhX6/DpsDqfAmoy++yJQH6Z6fl0OhWuvYpwPFTOm5xWwtbOOiWdA2gT9c5Etl6N/Yl4BaPftCDn9Sk84r+oqtbvYJ79PjVINh/kKtnQwWDNGjyZ7WjaMnf/457ciEOo9YaOEqcnBZSoqkNDOlAB0T4Yq7W/LOIV989M9DrOIMv9uEBomC69ZYm8= root@rhel9rishi"
   clusters:
   - clusterName: "geored-workload"
@@ -80,13 +80,30 @@ spec:
                   enabled: false
                 ipv6:
                   enabled: false
-              - name: ens10f0np0.22 
+              - name: bond0
+                type: bond
+                state: up
+                mtu: 9000
+                  #                mac-address: "e4:3d:1a:60:70:f8"
+                ipv4:
+                  enabled: false
+                ipv6:
+                  enabled: false
+                link-aggregation:
+                  mode: active-backup
+                  options:
+                    miimon: 100
+                      #                    lacp_rate: slow
+                  port:
+                    - ens10f0np0
+                    - ens10f1np1
+              - name: bond0.22 
                 description: node-mgmt geo2.site
                 type: vlan
                 state: up
-                  #                mtu: 9000
+                mtu: 9000
                 vlan:
-                  base-iface: ens10f0np0
+                  base-iface: bond0
                   id: 22
                 ipv4:
                   enabled: true
@@ -106,7 +123,7 @@ spec:
             routes:
               config:
               - destination: 0.0.0.0/0
-                next-hop-interface: ens10f0np0.22 
+                next-hop-interface: bond0.22 
                 next-hop-address: 10.188.22.1
                 table-id: 254
 
@@ -144,13 +161,30 @@ spec:
                   enabled: false
                 ipv6:
                   enabled: false
-              - name: ens10f0np0.22
+              - name: bond0
+                type: bond
+                state: up
+                mtu: 9000
+                  #                mac-address: "e4:3d:1a:60:43:44"
+                ipv4:
+                  enabled: false
+                ipv6:
+                  enabled: false
+                link-aggregation:
+                  mode: active-backup
+                  options:
+                    miimon: 100
+                      #                    lacp_rate: slow
+                  port:
+                    - ens10f0np0
+                    - ens10f1np1
+              - name: bond0.22
                 description: node-mgmt geo2.site
                 type: vlan
                 state: up
-#                mtu: 9000
+                mtu: 9000
                 vlan:
-                  base-iface: ens10f0np0
+                  base-iface: bond0
                   id: 22
                 ipv4:
                   enabled: true
@@ -170,7 +204,7 @@ spec:
             routes:
               config:
               - destination: 0.0.0.0/0
-                next-hop-interface: ens10f0np0.22
+                next-hop-interface: bond0.22
                 next-hop-address: 10.188.22.1 
                 table-id: 254
 
@@ -208,13 +242,30 @@ spec:
                   enabled: false
                 ipv6:
                   enabled: false
-              - name: ens10f0np0.22
+              - name: bond0
+                type: bond
+                state: up
+                mtu: 9000
+                  #                mac-address: "e4:3d:1a:60:a2:0c"
+                ipv4:
+                  enabled: false
+                ipv6:
+                  enabled: false
+                link-aggregation:
+                  mode: active-backup
+                  options:
+                    miimon: 100
+                      #                    lacp_rate: slow
+                  port:
+                    - ens10f0np0
+                    - ens10f1np1
+              - name: bond0.22
                 description: node-mgmt geo2.site
                 type: vlan
                 state: up
-                  #                mtu: 9000
+                mtu: 9000
                 vlan:
-                  base-iface: ens10f0np0
+                  base-iface: bond0
                   id: 22
                 ipv4:
                   enabled: true
@@ -234,6 +285,6 @@ spec:
             routes:
               config:
               - destination: 0.0.0.0/0
-                next-hop-interface: ens10f0np0.22 
+                next-hop-interface: bond0.22 
                 next-hop-address: 10.188.22.1
                 table-id: 254
