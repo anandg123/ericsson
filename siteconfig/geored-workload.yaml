@@ -118,8 +118,7 @@ spec:
             dns-resolver:
               config:
                 server:
-                - 10.188.25.11
-                - 10.188.22.2
+                - 10.188.22.11
             routes:
               config:
               - destination: 0.0.0.0/0
@@ -199,8 +198,7 @@ spec:
             dns-resolver:
               config:
                 server:
-                - 10.188.25.11
-                - 10.188.22.2
+                - 10.188.22.11
             routes:
               config:
               - destination: 0.0.0.0/0
@@ -280,8 +278,7 @@ spec:
             dns-resolver:
               config:
                 server:
-                - 10.188.25.11
-                - 10.188.22.2
+                - 10.188.22.11
             routes:
               config:
               - destination: 0.0.0.0/0
