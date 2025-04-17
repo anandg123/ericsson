@@ -12,7 +12,7 @@ spec:
   project: site-policy-project
   source:
     path: policygentemplates/
-    repoURL: https://github.com/anandg123/ericsson/tree/main 
+    repoURL: https://github.com/anandg123/ericsson.git 
     targetRevision: main
   syncPolicy:
     automated:
