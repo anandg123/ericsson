@@ -396,7 +396,7 @@ spec:
           kubernetes.io/hostname:  master1.geored-workload.geo2.site
         desiredState:
           interfaces:
-            - <<: *bond0-26
+            - name: bond0.24 #            - <<: *bond0-26
               ipv4:
                 address:
                   - ip: 10.188.26.39
@@ -415,7 +415,7 @@ spec:
           kubernetes.io/hostname:  master2.geored-workload.geo2.site
         desiredState:
           interfaces:
-            - <<: *bond0-26
+            - name: bond0.24 #            - <<: *bond0-26
               ipv4:
                 address:
                   - ip: 10.188.26.40
